@@ -132,9 +132,9 @@ class ReputationAPI(object):
         data.open()
 
         # Check if posted data is a duplicate
-        if rid not in data.db:
+        if (rid+"-"+reputer+"-"+reputee) not in data.db:
             # If posted data is not a duplicate, add data to database
-            data.db[rid] = {"reputer": reputer,
+            data.db[rid+"-"+reputer+"-"+reputee] = {"reputer": reputer,
                             "reputee": reputee,
                             "repute": {"rid": rid, "feature": feature, "value": value}}
             # Close database
