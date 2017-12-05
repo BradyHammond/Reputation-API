@@ -13,6 +13,8 @@ $ pip3 install -r requirements.txt
 $ gunicorn run:app
 ```
 To stop the server type `Ctrl+C` in the command-line. To exit the virtual environment type `deactivate` in the command-line.
+
+Included with the API is basic unit testing. To run the provided unit tests ensure that your virtual environment is active and then run the command `python3 -m unittest tests/test_api.py`. There are currently 8 test cases. If a test case fails please create an issue in this git repository and include the failure message.
 # Usage
 POST requests to the API should be of the following format and hit the endpoint "/reputation":
 ```
@@ -51,3 +53,5 @@ GET requests to the API should hit the enpoint "/reputation/{reputee}" and will 
 }
  ```
 The server will throw a 400 error if no reputee query parameter is included in the URL or if the queried reputee cannot be found in the database. A successful GET request will return a 200 status and a JSON.
+# Development
+The API was designed with simplicity and clarity in mind. The project has 3 main parts: the api object, the processor object, and the storage object. The api object sets up the get and post routes for the api, and mostly just handles data verification. The processor is created to process GET requested data, and calculates the clarity, clout, and reach statistics for a given reputee. The storage object simply interfaces with the database (which is a Python shelve). The API can function in two modes: Development and Production. This ensures that the production database and development database are kept separate. The API has a run.py file that creates the api object to run on the server. The API also has a test_api.py file to unit test the API. 
